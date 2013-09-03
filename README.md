@@ -71,7 +71,7 @@ Computer label set to "foobar"
 Check the t.lua file source and use http://jsfiddle.net/MZ4Vt/2/ to upload it to your turtle.
 I.e.
 ```
-r shell.run("r","t=turtle;a={...};p=a[1];d={[\"f\"]=t.forward,[\"u\"]=t.up,[\"d\"]=t.down,[\"b\"]=t.back,[\"l\"]=t.turnLeft,[\"r\"]=t.turnRight,[\"F\"]=t.dig,[\"U\"]=t.digUp,[\"D\"]=t.digDown};p:gsub(\".\",function(c)d[c]()end)")
+r shell.run("r","t=turtle;d={[\"f\"]=t.forward,[\"u\"]=t.up,[\"d\"]=t.down,[\"b\"]=t.back,[\"l\"]=t.turnLeft,[\"r\"]=t.turnRight,[\"F\"]=t.dig,[\"U\"]=t.digUp,[\"D\"]=t.digDown};({...})[1]:gsub(\".\",function(c)d[c]()end)")
 ```
 (Since program is longer than 128 chars, you have to make 2 copypastes.)
 
