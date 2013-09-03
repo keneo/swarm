@@ -120,4 +120,10 @@ It would be cool if we could:
 t2 5x(UFDf_UFDd)
 ```
 
+Or
+
+```
+t2 :M=UFD 5x(MfMd)
+```
+
 TODO...
