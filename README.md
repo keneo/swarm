@@ -22,8 +22,27 @@ shell.run("b")
 
 Press CTRL,ENTER,CTRL,RIGHT,ENTER
 
-Test:
+Test. Now you can copy&paste:
 
 ```lua
-r write("Hello World!")
+r write("Hello!\n")
 ```
+```
+Hello!
+```
+
+Unfortunately you can't use spaces so its not easy to write full "Hello World!".
+
+Copy&Paste:
+```lua
+r write("Hello"..string.char(32).."World!\n")
+```
+```
+Hello World!
+```
+
+
+
+
+
+
