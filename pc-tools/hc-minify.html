@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title> - jsFiddle demo</title>
+  
+  <script type='text/javascript' src='//code.jquery.com/jquery-2.0.2.js'></script>
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+  <style type='text/css'>
+    
+  </style>
+  
+
+
+<script type='text/javascript'>//<![CDATA[ 
+$(window).load(function(){
+function dof(){
+    $("#out")
+    .val('r shell.run("r","'+
+            $("#in")
+             .val()
+             .replace(/\\/g,'\\\\')
+             .replace(/\"/g,'\\"')
+             .replace(/ /g,';')
+             .replace(/\n/g,';')
+             +
+            '")'
+           )
+}
+
+dof()
+
+$("#do").click(dof)
+
+$("#in").keyup(dof)
+});//]]>  
+
+</script>
+
+
+</head>
+<body>
+  <textarea id="in">write("Hello")
+write("World\n")
+
+</textarea>
+<button id="do">HC cc lua minify</button>
+<textarea id="out"></textarea>
+  
+</body>
+
+
+</html>
+
