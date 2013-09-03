@@ -99,6 +99,25 @@ Code is a sequence of chars. 1 char = 1 command.
 4. First app for t
 ==================
 
+Lets dig make stairs down of length 5. We need sth like:
+```
+UFDf UFDd
+UFDf UFDd
+UFDf UFDd
+UFDf UFDd
+UFDf UFDd
+```
+So we have to put:
+```
+t UFDfUFDdUFDfUFDdUFDfUFDdUFDfUFDdUFDfUFDd
+```
+
+Not very readable isn't.
+
+It would be cool if we could:
 
 ```
+t2 5x(UFDf_UFDd)
 ```
+
+TODO...
