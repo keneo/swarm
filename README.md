@@ -45,13 +45,7 @@ Hello World!
 
 Let's try to make copypasting more handy
 
-Copy&paste this:
-```lua
-r file=fs.open("b","w")file.write(read().."\n")file.write(read().."\n")file.close()shell.run("b")
-write("Hello World!\n")
-
-write("Hello World!\n")
-```
+http://jsfiddle.net/9WbbP/2/
 
 
 
