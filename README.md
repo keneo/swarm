@@ -68,6 +68,20 @@ Computer label set to "foobar"
 3. DSL for turtle
 =================
 
+Check the t.lua file source and use http://jsfiddle.net/MZ4Vt/2/ to upload it to your turtle.
+I.e.
+```
+r shell.run("r","t=turtle;a={...};p=a[1];d={[\"f\"]=t.forward,[\"u\"]=t.up,[\"d\"]=t.down,[\"b\"]=t.back,[\"l\"]=t.turnLeft,[\"r\"]=t.turnRight,[\"F\"]=t.dig,[\"U\"]=t.digUp,[\"D\"]=t.digDown};p:gsub(\".\",function(c)d[c]()end)")
+```
+(Since program is longer than 128 chars, you have to make 2 copypastes.)
+
+Save as 't':
+```
+copy b t
+```
+
+
+
 Usage: t [code]
 
 Code is a sequence of chars. 1 char = 1 command.
@@ -81,13 +95,3 @@ Code is a sequence of chars. 1 char = 1 command.
 * F - turtle.dig()
 * U - turtle.digUp()
 * D - turtle.digDown()
-
-Check the t.lua file source and use http://jsfiddle.net/MZ4Vt/2/ to upload it to your turtle.
-
-```
-r shell.run("r","t=turtle;a={...};p=a[1];d={[\"f\"]=t.forward,[\"u\"]=t.up,[\"d\"]=t.down,[\"b\"]=t.back,[\"l\"]=t.turnLeft,[\"r\"]=t.turnRight,[\"F\"]=t.dig,[\"U\"]=t.digUp,[\"D\"]=t.digDown};p:gsub(\".\",function(c)d[c]()end)")
-
-copy b t
-```
-
-Since program is longer than 128 chars, you have to make 2 copypastes.
