@@ -62,15 +62,15 @@ Usage: t [code]
 
 Code is a sequence of chars. 1 char = 1 command.
 
-f - turtle.forward()
-b - turtle.back()
-u - turtle.up()
-d - turtle.down()
-l - turtle.turnLeft()
-r - turtle.turnRight()
-F - turtle.dig()
-U - turtle.digUp()
-D - turtle.digDown()
+* f - turtle.forward()
+* b - turtle.back()
+* u - turtle.up()
+* d - turtle.down()
+* l - turtle.turnLeft()
+* r - turtle.turnRight()
+* F - turtle.dig()
+* U - turtle.digUp()
+* D - turtle.digDown()
 
 Check the t.lua file source and use http://jsfiddle.net/MZ4Vt/2/ to upload it to your turtle.
 
