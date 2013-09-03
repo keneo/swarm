@@ -55,7 +55,17 @@ http://jsfiddle.net/MZ4Vt/2/
 
 So now I assume you can copy paste very small programs into Computercraft.
 
-2. DSL for turtle
+2. Make your files persistant
+=============================
+
+```
+label set foobar
+```
+```
+Computer label set to "foobar"
+```
+
+3. DSL for turtle
 =================
 
 Usage: t [code]
@@ -74,3 +84,10 @@ Code is a sequence of chars. 1 char = 1 command.
 
 Check the t.lua file source and use http://jsfiddle.net/MZ4Vt/2/ to upload it to your turtle.
 
+```
+r shell.run("r","t=turtle;a={...};p=a[1];d={[\"f\"]=t.forward,[\"u\"]=t.up,[\"d\"]=t.down,[\"b\"]=t.back,[\"l\"]=t.turnLeft,[\"r\"]=t.turnRight,[\"F\"]=t.dig,[\"U\"]=t.digUp,[\"D\"]=t.digDown};p:gsub(\".\",function(c)d[c]()end)")
+
+copy b t
+```
+
+Since program is longer than 128 chars, you have to make 2 copypastes.
