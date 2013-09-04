@@ -16,10 +16,15 @@ Manually type:
 
 ```lua
 file=fs.open("b","w")
-a={...}
-file.write(a[1])
+file.write(({...})[1])
 file.close()
 shell.run("b")
+```
+
+or as 1 line
+
+```lua
+file=fs.open("b","w")file.write(({...})[1])file.close()shell.run("b")
 ```
 
 Press CTRL,ENTER,CTRL,RIGHT,ENTER
