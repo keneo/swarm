@@ -51,7 +51,7 @@ NOTE: Minecraft copy&paste appears to limit the copypaste to 128 chars (?) :\
 
 So here is more HC version:
 
-http://jsfiddle.net/MZ4Vt/2/
+http://jsfiddle.net/xZDbs/1/
 
 So now I assume you can copy paste very small programs into Computercraft.
 
