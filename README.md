@@ -45,7 +45,7 @@ Hello World!
 
 Let's try to make copypasting more handy
 
-http://jsfiddle.net/9WbbP/3/
+http://jsfiddle.net/9WbbP/4/
 
 NOTE: Minecraft copy&paste appears to limit the copypaste to 128 chars (?) :\
 
