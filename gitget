@@ -1,0 +1,143 @@
+--[[ gitget
+  An updater for ComputerCraft scripts stored on a github.com
+]]--
+ 
+-- Configuration variables
+local sConfigName = "gitget.cfg"
+ 
+-- Returns full GitHub address
+function createAddress(tConfig)
+  local sUrl = "http://raw.github.com"
+  tConfig["filename"] = string.gsub(tConfig["filename"], "%s", "%%20")
+  return (sUrl .. "/" .. tConfig["user"] .. "/" .. tConfig["project"] .. "/" .. tConfig["branch"] .. "/" .. tConfig["filename"])
+end
+ 
+-- Loads a table from file
+function loadTable(sPath)
+  if not fs.exists(sPath) then
+    error("loadTable() file not found: " .. sPath)
+  end
+ 
+  if fs.isDir(sPath) then
+    error("loadTable() cannot open a directory")
+  end
+ 
+  local file = fs.open(sPath, "r")
+  local sTable = file.readAll()
+  file.close()
+  return textutils.unserialize(sTable)
+end
+ 
+-- Saves a table to file
+-- Uses saveString()
+function saveTable(tData, sPath)
+  local sSerializedData = textutils.serialize(tData)
+  return saveString(sSerializedData, sPath)
+end
+ 
+-- Saves a string to file
+function saveString(sData, sPath)
+  if fs.isDir(sPath) then
+    error("saveString() cannot save over a directory")
+  end
+ 
+  local file = fs.open(sPath, "w")
+  file.write(sData)
+  file.close()
+  return true
+end
+ 
+-- Downloads a file from url provided
+function download(sUrl, sPath)
+  print("Downloading: " .. sUrl)
+  if http then
+    local sData = http.get(sUrl)
+   
+    if sData then
+      print("Fetched file")
+      return saveString(sData.readAll(), sPath)
+    else
+      print("Failed to fetch file: " .. sUrl)
+      return false
+    end
+   
+  else
+    error("download() needs http api enabled to fetch files")
+  end
+end
+ 
+-- Writes a prompt at pos
+function promptPos(sPrompt, nX, nY)
+  term.setCursorPos(nX, nY)
+  term.clearLine()
+  term.write(sPrompt)
+  return true
+end
+ 
+function assemblePromptTable(tConfig)
+  tPrompt = {
+    "Gitget - a github file fetcher.",
+    "Filename [" .. tConfig["filename"] .. "]: ",
+    "Branch [" .. tConfig["branch"] .. "]: ",
+    "Project [" .. tConfig["project"] .. "]: ",
+    "User [" .. tConfig["user"] .. "]: ",
+    "Press enter with no input to download.",
+  }
+  return tPrompt
+end
+ 
+-- Draws the config settings on the screen
+-- returns prompt table
+function drawPrompt(tPrompt)
+  for nKey, sValue in ipairs(tPrompt) do
+    promptPos(sValue, 1, nKey)
+  end
+  return true
+end
+ 
+-- Invokes read() after the line given
+function userInput(nPos, tPrompt)
+  term.setCursorPos((#tPrompt[nPos] + 1), nPos)
+  return read()
+end
+ 
+-- Checks for first run and creates config file
+function checkFirstInit()
+  if not fs.exists(sConfigName) then
+    tInit = {["filename"] = "", ["branch"] = "master", ["project"] = "swarm", ["user"] = "keneo",}
+    saveTable(tInit, sConfigName)
+  end
+end
+ 
+-- Set some global variables
+local nInputPos = 2
+local tConfig
+local tPrompt
+local sInput
+local tInputRow = {"prompt", "filename", "branch", "project", "user"}
+ 
+-- Runtime section
+checkFirstInit()
+term.clear()
+while true do
+  tConfig = loadTable(sConfigName)
+  tPrompt = assemblePromptTable(tConfig)
+  drawPrompt(tPrompt)
+  sInput = userInput(nInputPos, tPrompt)
+ 
+  if sInput == "" then
+    sInput = tConfig[tInputRow[nInputPos]]
+    break
+  elseif sInput == " " then
+      nInputPos = nInputPos + 1
+      if nInputPos > #tInputRow then nInputPos = 2 end
+  else
+    tConfig[tInputRow[nInputPos]] = sInput
+    saveTable(tConfig, sConfigName)
+    nInputPos = nInputPos + 1
+    if nInputPos > #tInputRow then nInputPos = 2 end
+  end
+end
+ 
+term.setCursorPos(1, (#tPrompt + 1))
+download(createAddress(tConfig), tConfig["filename"])
