@@ -1,3 +1,5 @@
 ```
-pastebin get zVWRy1Qg gitget
+pastebin get yDxfeTwa gitget
+wget
+[enter]
 ```
