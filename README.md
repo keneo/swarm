@@ -52,12 +52,13 @@ Hello World!
 ```
 
 1.2. Multiline copy&paste
+=================
 
 Let's try to make copypasting more handy
 
 https://github.com/keneo/swarm/blob/master/ScriptMinifyFiddle.md
 
-So now I assume you can copy paste very small programs into Computercraft.
+So now I assume you can copy paste very small programs into Computercraft (via fiddle page).
 
 2. Make your files persistant
 =============================
