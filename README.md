@@ -50,13 +50,7 @@ Hello World!
 
 Let's try to make copypasting more handy
 
-http://jsfiddle.net/9WbbP/8/
-
-NOTE: Minecraft copy&paste appears to limit the copypaste to 128 chars (?) :\
-
-So here is more HC version:
-
-http://jsfiddle.net/xZDbs/1/
+https://github.com/keneo/swarm/blob/master/ScriptMinifyFiddle.md
 
 So now I assume you can copy paste very small programs into Computercraft.
 
@@ -73,8 +67,8 @@ Computer label set to "foobar"
 3. DSL for turtle
 =================
 
-Check the t.lua file source and use http://jsfiddle.net/MZ4Vt/2/ to upload it to your turtle.
-I.e. (really build it yourself with https://github.com/keneo/swarm/blob/master/t.lua and http://jsfiddle.net/MZ4Vt/2/, this line below is outdated)
+Check the t.lua file source and use https://github.com/keneo/swarm/blob/master/ScriptMinifyFiddle.md to upload it to your turtle.
+I.e. (really build it yourself with https://github.com/keneo/swarm/blob/master/t.lua and https://github.com/keneo/swarm/blob/master/ScriptMinifyFiddle.md, this line below is outdated)
 ```
 r shell.run("r","t=turtle;d={[\"f\"]=t.forward,[\"u\"]=t.up,[\"d\"]=t.down,[\"b\"]=t.back,[\"l\"]=t.turnLeft,[\"r\"]=t.turnRight,[\"F\"]=t.dig,[\"U\"]=t.digUp,[\"D\"]=t.digDown};({...})[1]:gsub(\".\",function(c)d[c]()end)")
 ```
