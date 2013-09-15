@@ -2,7 +2,9 @@ Minecraft copy&paste appears to limit the copypasted text size to 128 chars and 
 
 Let's try to make copypasting more handy (It uses 'r' script we created before).
 
-http://jsfiddle.net/9WbbP/8/
+http://jsfiddle.net/9WbbP/8/show/
+
+(edit or fork here: http://jsfiddle.net/9WbbP/8/ )
 
 Here is more HC version:
 
