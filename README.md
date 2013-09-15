@@ -6,7 +6,7 @@ Swarm is a tutorial and toolkit for offline Computercraft (without http)
 1. Copy&paste
 ==========
 
-First goal is make it possible to copy my lua code from my Windows text editor.
+First goal is make it possible to copy multiline lua scripts from Windows text editor.
 
 ```shell
 edit r
