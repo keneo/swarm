@@ -3,16 +3,19 @@ swarm
 
 Swarm is a tutorial and toolkit for offline Computercraft (without http)
 
-1. Copy&paste
-==========
+1. Goal: Copy&paste
+=============
 
-First goal is make it possible to copy multiline lua scripts from Windows text editor.
+First goal is to make it possible to copy multiline lua scripts from Windows text editor.
+
+1.1. Step: 'r' run lua code from command line
+==========
 
 ```shell
 edit r
 ```
 
-Manually type:
+Manually type (or copy&paste line by line):
 
 ```lua
 file=fs.open("b","w")
@@ -29,7 +32,7 @@ file=fs.open("b","w")file.write(({...})[1])file.close()shell.run("b")
 
 Press CTRL,ENTER,CTRL,RIGHT,ENTER
 
-Test. Now you can copy&paste somethig:
+Test. Now you can lua from command line. Copy&paste this input computercraft shell:
 
 ```lua
 r write("Hello!\n")
@@ -47,6 +50,8 @@ r write("Hello"..string.char(32).."World!\n")
 ```
 Hello World!
 ```
+
+1.2. Multiline copy&paste
 
 Let's try to make copypasting more handy
 
