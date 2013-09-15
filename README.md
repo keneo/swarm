@@ -70,7 +70,7 @@ label set foobar
 Computer label set to "foobar"
 ```
 
-3. DSL for turtle
+3. 't' DSL for turtle
 =================
 
 Check the t.lua file source and use https://github.com/keneo/swarm/blob/master/ScriptMinifyFiddle.md to upload it to your turtle.
