@@ -1,0 +1,4 @@
+---
+ resources:
+   - https://rawgithub.com/oxyc/luaparse/master/luaparse.js
+   - https://rawgithub.com/mathiasbynens/luamin/master/luamin.js
