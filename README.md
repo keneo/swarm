@@ -1,7 +1,8 @@
 swarm
 =====
 
-Swarm is a tutorial and toolkit for offline Computercraft (without http)
+Swarm is a tutorial and toolkit for offline Computercraft (without http). 
+It aims for dealing with the limitations of http disabled tekkit servers.
 
 1. Goal: Copy&paste
 =============
