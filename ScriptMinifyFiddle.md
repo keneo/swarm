@@ -17,6 +17,7 @@ TODO:
 * Decrese cost (characters count) of encoding of space i.e. by using regex replace
 * Remove dependencies to third party hosted js libs
 * "Copy" buttons
+* * make it work: http://jsfiddle.net/gh/get/jquery/2.0.2/dependencies/luaparse,luamin/keneo/swarm/tree/master/pc-tools/LuaMinifyAnsCopyPasteFiddle/
 
 (edit or fork here: http://jsfiddle.net/9WbbP/8/ )
 
