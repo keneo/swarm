@@ -1,8 +1,8 @@
+Minecraft copy&paste appears to limit the copypasted text size to 128 chars and is making problems with newlines.
+
 Let's try to make copypasting more handy
 
 http://jsfiddle.net/9WbbP/8/
-
-NOTE: Minecraft copy&paste appears to limit the copypaste to 128 chars (?) :\
 
 Here is more HC version:
 
