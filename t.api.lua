@@ -28,3 +28,7 @@ end
 function stairsUp(k)
   t(string.rep("uUFfUFD",k))
 end
+
+function tunnel2(k)
+  t(string.rep("FfU",k))
+end
