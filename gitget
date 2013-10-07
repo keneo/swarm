@@ -7,7 +7,7 @@ local sConfigName = "gitget.cfg"
  
 -- Returns full GitHub address
 function createAddress(tConfig)
-  local sUrl = "http://raw.github.com"
+  local sUrl = "https://raw.github.com"
   tConfig["filename"] = string.gsub(tConfig["filename"], "%s", "%%20")
   return (sUrl .. "/" .. tConfig["user"] .. "/" .. tConfig["project"] .. "/" .. tConfig["branch"] .. "/" .. tConfig["filename"])
 end
