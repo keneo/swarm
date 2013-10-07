@@ -3,4 +3,4 @@ d={["f"]=t.forward,["u"]=t.up,["d"]=t.down,["b"]=t.back,["l"]=t.turnLeft,["r"]=t
 ({...})[1]:gsub(".",function(c)
 if(c:find("%d"))then t.select(c)
 else d[c]()
-end)
+end end)
