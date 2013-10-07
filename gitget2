@@ -108,6 +108,10 @@ function checkFirstInit()
     saveTable(tInit, sConfigName)
   end
 end
+
+function string.ends(String,End)
+   return End=='' or string.sub(String,-string.len(End))==End
+end
  
 -- Set some global variables
 local nInputPos = 2
@@ -141,3 +145,7 @@ end
  
 term.setCursorPos(1, (#tPrompt + 1))
 download(createAddress(tConfig), tConfig["filename"])
+
+if (tConfig["filename"]:ends(".lua"))
+  shell.run("mv " ..tConfig["filename"].. " " .. tConfig["filename"]:gsub(".lua",""))
+end
