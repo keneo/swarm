@@ -32,3 +32,11 @@ end
 function tunnel2(k)
   t(string.rep("FfU",k))
 end
+
+function tunnel2kwadrat(k)
+  for i=1,4 do
+    tunnel2(k)
+    t("r")
+  end
+end
+
