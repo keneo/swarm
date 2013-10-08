@@ -10,11 +10,11 @@ function worth(c)
   return true
 end
 
-function lookY(name,compare,move,dig,moveBack)
+function look(name,compare,move,dig,moveBack)
   if (worth(compare)) then
     repeat
       if (not dig()) then
-        write ("cancel dig look y "..name)
+        write ("cancel dig look "..name)
         return
       end
     until not move()
@@ -24,11 +24,11 @@ function lookY(name,compare,move,dig,moveBack)
 end
 
 function lookaround()
-  lookY("up",turtle.compareUp,turtle.up,turtle.digUp,turtle.down)
-  lookY("down",turtle.compareDown,turtle.down,turtle.digDown,turtle.up)
+  look("up",turtle.compareUp,turtle.up,turtle.digUp,turtle.down)
+  look("down",turtle.compareDown,turtle.down,turtle.digDown,turtle.up)
   
   for s=1,4 do
-    lookY("forw",turtle.compare,turtle.forward,turtle.dig,turtle.back)
+    look("forw",turtle.compare,turtle.forward,turtle.dig,turtle.back)
     turtle.turnRight()
   end
 end
