@@ -1,7 +1,10 @@
 -- recursive mining bot attempt
 
+--on slots 2,3,4 you need to keep dirt,stone and gravel
+
+
 function worth(c)
-  for p=1,3 do --unintresting
+  for p=2,4 do --unintresting
     turtle.select(p)
     if (c()) then
       return false
