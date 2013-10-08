@@ -26,7 +26,7 @@ function t(code)
 end
 
 function stairsUp(k)
-  t(string.rep("uUFfUFD",k))
+  t(("uUFfUFD"):rep(k))
 end
 
 function tunnel2(k)
