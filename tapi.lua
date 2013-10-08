@@ -26,14 +26,14 @@ function t(code)
 end
 
 function stairsUp(k)
-  ("uUFfUFD"):rep(k)
+  return ("uUFfUFD"):rep(k)
 end
 
 function tunnel2(k)
-  string.rep("FfU",k)
+  return string.rep("FfU",k)
 end
 
 function tunnel2square(k)
-  (tunnel2(k).."r"):rep(4)
+  return (tunnel2(k).."r"):rep(4)
 end
 
