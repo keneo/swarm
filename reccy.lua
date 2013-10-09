@@ -47,7 +47,7 @@ end
 
 function look(name,compare,detect,move,dig,moveBack)
   write("\n"..name)
-  if (worth(compare)) then
+  if (detect() and worth(compare)) then
     repeat
       if (not dig()) then
         write ("\ncancel dig look "..name)
