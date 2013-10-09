@@ -1,6 +1,6 @@
 -- recursive mining bot attempt
 
---on slots 2,3,4 you need to keep dirt,stone and gravel
+--on slots 2,3,4,5 you need to keep dirt,stone,gravel,stone
 
 -- dont let buggy robot escape you 
 maxMoves=10
@@ -36,7 +36,7 @@ end
 
 
 function worth(c)
-  for p=2,4 do --unintresting
+  for p=2,5 do --unintresting
     turtle.select(p)
     if (c()) then
       return false
