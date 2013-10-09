@@ -2,6 +2,38 @@
 
 --on slots 2,3,4 you need to keep dirt,stone and gravel
 
+-- dont let buggy robot escape you 
+maxMoves=10
+function myForward()
+  maxMoves=maxMoves-1
+  if (maxMoves>0) then
+    return turtle.forward()
+  end
+  return false
+end
+function myBack()
+  maxMoves=maxMoves-1
+  if (maxMoves>0) then
+    return turtle.back()
+  end
+  return false
+end
+function myUp()
+  maxMoves=maxMoves-1
+  if (maxMoves>0) then
+    return turtle.up()
+  end
+  return false
+end
+function myDown()
+  maxMoves=maxMoves-1
+  if (maxMoves>0) then
+    return turtle.down()
+  end
+  return false
+end
+
+
 
 function worth(c)
   for p=2,4 do --unintresting
@@ -28,20 +60,20 @@ function look(name,compare,detect,move,dig,moveBack)
 end
 
 function lookaround()
-  look("down",turtle.compareDown,turtle.detectDown,turtle.down,turtle.digDown,turtle.up)
+  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp)
   
   for s=1,4 do
-    look("forw"..s,turtle.compare,turtle.detect,turtle.forward,turtle.dig,turtle.back)
+    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack)
     turtle.turnRight()
   end
   
-  look("up",turtle.compareUp,turtle.detectUp,turtle.up,turtle.digUp,turtle.down)
+  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown)
 end
 
 function moveforward(n)
   if (n==0) then return end
   
-  while (not turtle.forward()) do
+  while (not myForward()) do
     if (not turtle.dig()) then
       write ("cancel dig forw "..n)
       return
@@ -50,7 +82,7 @@ function moveforward(n)
   
   lookaround()
   moveforward(n-1)
-  turtle.back()
+  myBack()
 end
 
 function validateStart()
