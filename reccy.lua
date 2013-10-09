@@ -89,6 +89,7 @@ function validateStart()
   if (turtle.getItemCount(2)==0) then return false end
   if (turtle.getItemCount(3)==0) then return false end
   if (turtle.getItemCount(4)==0) then return false end
+  if (turtle.getItemCount(5)==0) then return false end
   return true
 end
 
