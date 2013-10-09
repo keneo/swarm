@@ -104,3 +104,4 @@ function start()
   end
 end
 
+start()
