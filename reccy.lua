@@ -53,6 +53,17 @@ function moveforward(n)
   turtle.back()
 end
 
-moveforward(10)
+function validateStart()
+  if (turtle.getItemCount(2)==0) then return false end
+  if (turtle.getItemCount(3)==0) then return false end
+  if (turtle.getItemCount(4)==0) then return false end
+  return true
+end
+
+if (validateStart()) then
+  moveforward(10)
+else
+  write('validation failed')
+end
 --  forward() ? {put(forward) ... } : (dig(forward)||(deadend()) )
 
