@@ -56,7 +56,7 @@ function look(name,compare,detect,move,dig,moveBack)
         write ("\ncancel dig look "..name)
         return
       end
-    until not move()
+    until move()
     lookaround()
     moveBack()
   end
