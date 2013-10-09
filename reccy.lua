@@ -46,11 +46,11 @@ function worth(c)
 end
 
 function look(name,compare,detect,move,dig,moveBack)
-  write(name)
+  write("\n"..name)
   if (worth(compare)) then
     repeat
       if (not dig()) then
-        write ("cancel dig look "..name)
+        write ("\ncancel dig look "..name)
         return
       end
     until not move()
@@ -75,7 +75,7 @@ function moveforward(n)
   
   while (not myForward()) do
     if (not turtle.dig()) then
-      write ("cancel dig forw "..n)
+      write ("\ncancel dig forw "..n)
       return
     end
   end
@@ -93,10 +93,11 @@ function validateStart()
   return true
 end
 
-if (validateStart()) then
-  moveforward(10)
-else
-  write('validation failed')
+function start()
+  if (validateStart()) then
+    moveforward(4)
+  else
+    write('validation failed')
+  end
 end
---  forward() ? {put(forward) ... } : (dig(forward)||(deadend()) )
 
