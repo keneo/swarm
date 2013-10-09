@@ -3,7 +3,7 @@
 --on slots 2,3,4,5 you need to keep dirt,stone,gravel,stone
 
 -- dont let buggy robot escape you 
-maxMoves=10
+maxMoves=50 --not that buggy now
 function myForward()
   maxMoves=maxMoves-1
   if (maxMoves>0) then
