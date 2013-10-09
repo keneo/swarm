@@ -13,7 +13,8 @@ function worth(c)
   return true
 end
 
-function look(name,compare,move,dig,moveBack)
+function look(name,compare,detect,move,dig,moveBack)
+  write(name)
   if (worth(compare)) then
     repeat
       if (not dig()) then
@@ -27,13 +28,14 @@ function look(name,compare,move,dig,moveBack)
 end
 
 function lookaround()
-  look("up",turtle.compareUp,turtle.up,turtle.digUp,turtle.down)
-  look("down",turtle.compareDown,turtle.down,turtle.digDown,turtle.up)
+  look("down",turtle.compareDown,turtle.detectDown,turtle.down,turtle.digDown,turtle.up)
   
   for s=1,4 do
-    look("forw",turtle.compare,turtle.forward,turtle.dig,turtle.back)
+    look("forw"..s,turtle.compare,turtle.detect,turtle.forward,turtle.dig,turtle.back)
     turtle.turnRight()
   end
+  
+  look("up",turtle.compareUp,turtle.detectUp,turtle.up,turtle.digUp,turtle.down)
 end
 
 function moveforward(n)
