@@ -32,6 +32,9 @@ function myDown()
   end
   return false
 end
+function setMaxMoves(n)
+  maxMoves=n
+end
 
 
 
