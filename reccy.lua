@@ -129,4 +129,5 @@ function start()
   end
 end
 
-start()
+arg = ({...})[1]
+start(tonumber(arg))
