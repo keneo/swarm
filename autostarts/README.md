@@ -1,3 +1,3 @@
 Computers look for their autostrart scripts here.
 
-filename = [computer label].lua
+filename = comp.[computer label].start.lua
