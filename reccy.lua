@@ -83,7 +83,7 @@ function horizontalDigBack()
 end
 
 function lookaround()
-  if (not inctry()) return end
+  if (not inctry()) then return end
   
   look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp)
   
