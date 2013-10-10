@@ -4,6 +4,13 @@
 
 -- dont let buggy robot escape you 
 maxMoves=5000 --not that buggy now
+stackDepthMax=10  -- we disallow recursion deeper than stackDepthMax
+stackDepthCurrent=0 
+--TODO:stackoverflow usually indicates bug that leads to escape, so when detected we shoul just directly return home for safety
+
+function dec() stackDepthCurrent=stackDepthCurrent-1 end
+function inctry() stackDepthCurrent=stackDepthCurrent+1; if (stackDepthCurrent==stackDepthMax) then dec() return false end end
+
 
 function myForward()
   maxMoves=maxMoves-1
@@ -51,16 +58,20 @@ end
 
 function look(name,compare,detect,move,dig,moveBack,digBack)
   write("\n"..name)
+  if (not inctry()) return end
+  
   if (detect() and worth(compare)) then
     repeat
       if (not dig()) then
         write ("\ncancel dig look "..name)
-        return
+        dec() return
       end
     until move()
     lookaround()
     while not moveBack() do digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
   end
+  
+  dec()
 end
 
 function horizontalDigBack()
@@ -72,6 +83,8 @@ function horizontalDigBack()
 end
 
 function lookaround()
+  if (not inctry()) return end
+  
   look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp)
   
   for s=1,4 do
@@ -80,15 +93,18 @@ function lookaround()
   end
   
   look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown,turtle.digDown)
+  
+  dec()
 end
 
 function moveforward(n)
   if (n==0) then return end
+  if (not inctry()) return end
   
   while (not myForward()) do
     if (not turtle.dig()) then
       write ("\ncancel dig forw "..n)
-      return
+      dec() return
     end
   end
   
