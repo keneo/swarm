@@ -98,19 +98,19 @@ function worth(c)
   return true
 end
 
-function look(name,compare,detect,move,dig,moveBack,digBack)
+function look(dir,compare,detect,move,dig,moveBack,digBack)
   if (not inctry()) then return end
-  log(name)
   
   if (detect() and worth(compare)) then
+    log("found sth on "..dir)
     repeat
       if (not dig()) then
-        log ("cancel dig look "..name)
+        log ("cancel dig look "..dir)
         dec() return
       end
     until move()
     lookaround()
-    while not moveBack() do digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
+    while not moveBack() do log("removing unexpected obstacle") digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
   end
   
   dec()
@@ -143,6 +143,7 @@ function moveforward(n)
   if (n==0) then return end
   if (not inctry()) then return end
   
+  log ("mining forward "..n)
   while (not myForward()) do
     if (not turtle.dig()) then
       log ("cancel dig forw "..n)
