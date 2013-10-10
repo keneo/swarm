@@ -9,7 +9,7 @@ stackDepthCurrent=0
 --TODO:stackoverflow usually indicates bug that leads to escape, so when detected we shoul just directly return home for safety
 
 function dec() stackDepthCurrent=stackDepthCurrent-1 end
-function inctry() stackDepthCurrent=stackDepthCurrent+1; if (stackDepthCurrent==stackDepthMax) then dec() return false end end
+function inctry() stackDepthCurrent=stackDepthCurrent+1; if (stackDepthCurrent==stackDepthMax) then dec() return false else return true end end
 
 
 function myForward()
