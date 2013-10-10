@@ -153,7 +153,7 @@ function moveforward(n)
   
   lookaround()
   moveforward(n-1)
-  while not myBack() do horizontalDigBack() end
+  while not myBack() do log("removing unexpected obstacle") horizontalDigBack() end
 end
 
 function validateStart()
