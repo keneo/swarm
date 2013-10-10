@@ -47,8 +47,8 @@ function saveString(sData, sPath)
 end
 
 function log(s)
-  local file = fs.open("log", "w+")
-  local ls = (" "):rep(stackDepthCurrent)..textutils.serialize(s)
+  local file = fs.open("log", "a")
+  local ls = (" "):rep(stackDepthCurrent)..textutils.serialize(s).."\n"
   write(ls)
   file.write(ls)
   file.close()
