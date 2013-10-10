@@ -100,7 +100,7 @@ end
 
 function look(name,compare,detect,move,dig,moveBack,digBack)
   if (not inctry()) then return end
-  write(name)
+  log(name)
   
   if (detect() and worth(compare)) then
     repeat
