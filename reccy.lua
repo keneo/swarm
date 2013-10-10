@@ -4,6 +4,7 @@
 
 -- dont let buggy robot escape you 
 maxMoves=5000 --not that buggy now
+
 function myForward()
   maxMoves=maxMoves-1
   if (maxMoves>0) then
@@ -48,7 +49,7 @@ function worth(c)
   return true
 end
 
-function look(name,compare,detect,move,dig,moveBack)
+function look(name,compare,detect,move,dig,moveBack,digBack)
   write("\n"..name)
   if (detect() and worth(compare)) then
     repeat
@@ -58,19 +59,27 @@ function look(name,compare,detect,move,dig,moveBack)
       end
     until move()
     lookaround()
-    moveBack()
+    while not moveBack() do digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
   end
 end
 
+function horizontalDigBack()
+  turtle.turnRight() 
+  turtle.turnRight()
+  turtle.dig()
+  turtle.turnRight() 
+  turtle.turnRight()
+end
+
 function lookaround()
-  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp)
+  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp)
   
   for s=1,4 do
-    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack)
+    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack,horizontalDigBack)
     turtle.turnRight()
   end
   
-  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown)
+  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown,turtle.digDown)
 end
 
 function moveforward(n)
@@ -85,7 +94,7 @@ function moveforward(n)
   
   lookaround()
   moveforward(n-1)
-  myBack()
+  while not myBack() do horizontalDigBack() end
 end
 
 function validateStart()
