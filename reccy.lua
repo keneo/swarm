@@ -58,7 +58,7 @@ end
 
 function look(name,compare,detect,move,dig,moveBack,digBack)
   write("\n"..name)
-  if (not inctry()) return end
+  if (not inctry()) then return end
   
   if (detect() and worth(compare)) then
     repeat
@@ -99,7 +99,7 @@ end
 
 function moveforward(n)
   if (n==0) then return end
-  if (not inctry()) return end
+  if (not inctry()) then return end
   
   while (not myForward()) do
     if (not turtle.dig()) then
