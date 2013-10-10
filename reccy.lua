@@ -11,6 +11,48 @@ stackDepthCurrent=0
 function dec() stackDepthCurrent=stackDepthCurrent-1 end
 function inctry() stackDepthCurrent=stackDepthCurrent+1; if (stackDepthCurrent==stackDepthMax) then dec() return false else return true end end
 
+-- Loads a table from file
+function loadTable(sPath)
+  if not fs.exists(sPath) then
+    error("loadTable() file not found: " .. sPath)
+  end
+ 
+  if fs.isDir(sPath) then
+    error("loadTable() cannot open a directory")
+  end
+ 
+  local file = fs.open(sPath, "r")
+  local sTable = file.readAll()
+  file.close()
+  return textutils.unserialize(sTable)
+end
+ 
+-- Saves a table to file
+-- Uses saveString()
+function saveTable(tData, sPath)
+  local sSerializedData = textutils.serialize(tData)
+  return saveString(sSerializedData, sPath)
+end
+ 
+-- Saves a string to file
+function saveString(sData, sPath)
+  if fs.isDir(sPath) then
+    error("saveString() cannot save over a directory")
+  end
+ 
+  local file = fs.open(sPath, "w")
+  file.write(sData)
+  file.close()
+  return true
+end
+
+function log(s)
+  local file = fs.open("log", "w+")
+  local ls = (" "):rep(stackDepthCurrent)..textutils.serialize(s)
+  write(ls)
+  file.write(ls)
+  file.close()
+end
 
 function myForward()
   maxMoves=maxMoves-1
@@ -57,13 +99,13 @@ function worth(c)
 end
 
 function look(name,compare,detect,move,dig,moveBack,digBack)
-  write("\n"..name)
   if (not inctry()) then return end
+  write(name)
   
   if (detect() and worth(compare)) then
     repeat
       if (not dig()) then
-        write ("\ncancel dig look "..name)
+        log ("cancel dig look "..name)
         dec() return
       end
     until move()
@@ -103,7 +145,7 @@ function moveforward(n)
   
   while (not myForward()) do
     if (not turtle.dig()) then
-      write ("\ncancel dig forw "..n)
+      log ("cancel dig forw "..n)
       dec() return
     end
   end
@@ -122,11 +164,11 @@ function validateStart()
 end
 
 function start(n)
-  write('requested moveforward '..n)
+  log('requested moveforward '..n)
   if (validateStart()) then
     moveforward(n)
   else
-    write('validation failed')
+    log('validation failed')
   end
 end
 
