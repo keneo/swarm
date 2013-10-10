@@ -121,13 +121,15 @@ function validateStart()
   return true
 end
 
-function start()
+function start(n)
+  write('requested moveforward '..n)
   if (validateStart()) then
-    moveforward(20)
+    moveforward(n)
   else
     write('validation failed')
   end
 end
 
 arg = ({...})[1]
-start(tonumber(arg))
+order = tonumber(arg) or 10
+start(order)
