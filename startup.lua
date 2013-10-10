@@ -15,6 +15,18 @@ function loadTable()
   return textutils.unserialize(sTable)
 end
 
+-- Saves a string to file
+function saveString(sData, sPath)
+  if fs.isDir(sPath) then
+    error("saveString() cannot save over a directory")
+  end
+ 
+  local file = fs.open(sPath, "w")
+  file.write(sData)
+  file.close()
+  return true
+end
+
 function createAddress(tConfig)
   local sUrl = "https://raw.github.com"
   tConfig["filename"] = string.gsub(tConfig["filename"], "%s", "%%20")
