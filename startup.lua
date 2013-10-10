@@ -44,8 +44,9 @@ end
 tConfig = loadTable()
 
 local label=os.getComputerLabel()
-local githubfile = "autostarts/comp." .. label .. ".start.lua"
+local localFileName = "comp." .. label .. ".start.lua"
+local githubFileName="autostarts/"..localFileName
 
-tConfig["filename"]=githubfile
-download(createAddress(tConfig),githubfile)
-os.shell(githubfile)
+tConfig["filename"]=githubFileName
+download(createAddress(tConfig),localFileName)
+os.shell(localFileName)
