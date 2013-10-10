@@ -49,4 +49,4 @@ local githubFileName="autostarts/"..localFileName
 
 tConfig["filename"]=githubFileName
 download(createAddress(tConfig),localFileName)
-os.shell(localFileName)
+os.run({},localFileName)
