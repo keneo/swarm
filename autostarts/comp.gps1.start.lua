@@ -1,1 +1,1 @@
-os.shell("gps host -29 10 1161")
+os.run({},"gps host -29 10 1161")
