@@ -53,12 +53,16 @@ function download(sUrl, sPath)
 end
 
 
-local tConfig = loadTable()
+function main()
+  local tConfig = loadTable()
+  
+  local label=os.getComputerLabel()
+  local localFileName = "comp." .. label .. ".start.lua"
+  local githubFileName="autostarts/"..localFileName
+  
+  tConfig["filename"]=githubFileName
+  download(createAddress(tConfig),localFileName)
+  shell.run(localFileName)
+end
 
-local label=os.getComputerLabel()
-local localFileName = "comp." .. label .. ".start.lua"
-local githubFileName="autostarts/"..localFileName
-
-tConfig["filename"]=githubFileName
-download(createAddress(tConfig),localFileName)
-shell.run(localFileName)
+main()
