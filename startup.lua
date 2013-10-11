@@ -27,10 +27,10 @@ function saveString(sData, sPath)
   return true
 end
 
-function createAddress(tConfig)
+function createAddress(c)
   local sUrl = "https://raw.github.com"
-  tConfig["filename"] = string.gsub(tConfig["filename"], "%s", "%%20")
-  return (sUrl .. "/" .. tConfig["user"] .. "/" .. tConfig["project"] .. "/" .. tConfig["branch"] .. "/" .. tConfig["filename"])
+  c["filename"] = string.gsub(c["filename"], "%s", "%%20")
+  return (sUrl .. "/" .. c["user"] .. "/" .. c["project"] .. "/" .. c["branch"] .. "/" .. c["filename"])
 end
 
 -- Downloads a file from url provided
@@ -52,16 +52,16 @@ function download(sUrl, sPath)
   end
 end
 
-local tConfig = loadTable()
-
 function main()
+  
+  local tc = loadTable()
   
   local label=os.getComputerLabel()
   local localFileName = "comp." .. label .. ".start.lua"
   local githubFileName="autostarts/"..localFileName
   
-  tConfig["filename"]=githubFileName
-  download(createAddress(tConfig),localFileName)
+  tc["filename"]=githubFileName
+  download(createAddress(tc),localFileName)
   shell.run(localFileName)
 end
 
