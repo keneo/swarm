@@ -53,7 +53,7 @@ function download(sUrl, sPath)
 end
 
 
-tConfig = loadTable()
+local tConfig = loadTable()
 
 local label=os.getComputerLabel()
 local localFileName = "comp." .. label .. ".start.lua"
