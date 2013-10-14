@@ -112,24 +112,24 @@ end
 function look(dir,compare,detect,move,dig,moveBack,digBack, rozkop)
   if (not inctry()) then return end
     
-  --if (detect()) then
-  --  local foundsth = worth(compare)
-  --  
-  --  if (foundsth) then log("found sth on "..dir) end
-  --  
-   -- if (foundsth or rozkop>0) then
-  --    repeat
-  --      if (not tryuntil(dig,5)) then
-  --        log ("cancel on "..dir)
-  --        dec() return
-  --      end
-  --    until move()
---
-   --   lookaround(foundsth and rozkopDefaultSize or rozkop-1)
-   --   
-  --    while not moveBack() do log("removing unexpected obstacle") digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
-  --  end
- -- end
+  if (detect()) then
+    local foundsth = worth(compare)
+    
+    if (foundsth) then log("found sth on "..dir) end
+    
+    if (foundsth or rozkop>0) then
+      repeat
+        if (not tryuntil(dig,5)) then
+          log ("cancel on "..dir)
+          dec() return
+        end
+      until move()
+
+      lookaround(foundsth and rozkopDefaultSize or rozkop-1)
+      
+      while not moveBack() do log("removing unexpected obstacle") digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
+    end
+  end
   
   dec()
 end
@@ -143,20 +143,20 @@ function horizontalDigBack()
 end
 
 function lookaround(rozkop)
---  if (not inctry()) then return end
---  
---  if (rozkop>0) then log("lookaround with rozkop"..rozkop)
---  
---  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp, rozkop)
---  
---  for s=1,4 do
---    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack,horizontalDigBack, rozkop)
---    turtle.turnRight()
---  end
---  
---  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown,turtle.digDown, rozkop)
---  
---  dec()
+  if (not inctry()) then return end
+  
+  if (rozkop>0) then log("lookaround with rozkop"..rozkop) end
+  
+  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp, rozkop)
+  
+  for s=1,4 do
+    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack,horizontalDigBack, rozkop)
+    turtle.turnRight()
+  end
+  
+  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown,turtle.digDown, rozkop)
+  
+  dec()
 end
 
 function moveforward(n)
