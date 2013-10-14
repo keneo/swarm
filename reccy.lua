@@ -114,6 +114,7 @@ function look(dir,compare,detect,move,dig,moveBack,digBack, rozkop)
     
   if (detect()) then
     local foundsth = worth(compare)
+    
     if (foundsth) then log("found sth on "..dir) end
     
     if (foundsth or rozkop>0) then
@@ -129,7 +130,6 @@ function look(dir,compare,detect,move,dig,moveBack,digBack, rozkop)
       while not moveBack() do log("removing unexpected obstacle") digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
     end
   end
-  
   
   dec()
 end
