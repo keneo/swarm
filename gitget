@@ -112,7 +112,7 @@ end
 function string.ends(String,End)
    return End=='' or string.sub(String,-string.len(End))==End
 end
- 
+
 -- Set some global variables
 local nInputPos = 2
 local tConfig
@@ -148,7 +148,7 @@ download(createAddress(tConfig), tConfig["filename"])
 
 write(textutils.serialize(tConfig))
 
-if (tConfig["filename"]:ends(".lua")) then
+if (string.ends(tConfig["filename"],".lua")) then
   shell.run("rm " ..tConfig["filename"]:gsub(".lua",""))
   shell.run("mv " ..tConfig["filename"].. " " .. tConfig["filename"]:gsub(".lua",""))
 end
