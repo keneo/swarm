@@ -8,6 +8,9 @@ stackDepthMax=500  -- we disallow recursion deeper than stackDepthMax
 stackDepthCurrent=0 
 --TODO:stackoverflow usually indicates bug that leads to escape, so when detected we shoul just directly return home for safety
 
+rozkopDefaultSize=1
+
+
 function dec() stackDepthCurrent=stackDepthCurrent-1 end
 function inctry() stackDepthCurrent=stackDepthCurrent+1; if (stackDepthCurrent==stackDepthMax) then dec() return false else return true end end
 
@@ -106,20 +109,27 @@ function tryuntil(action,retrys)
   return false
 end
 
-function look(dir,compare,detect,move,dig,moveBack,digBack)
+function look(dir,compare,detect,move,dig,moveBack,digBack, rozkop)
   if (not inctry()) then return end
-  
-  if (detect() and worth(compare)) then
-    log("found sth on "..dir)
-    repeat
-      if (not tryuntil(dig,5)) then
-        log ("cancel dig look "..dir)
-        dec() return
-      end
-    until move()
-    lookaround()
-    while not moveBack() do log("removing unexpected obstacle") digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
+    
+  if (detect()) then
+    local foundsth = worth(compare)
+    if (foundsth) then log("found sth on "..dir) end
+    
+    if (foundsth or rozkop>0) then
+      repeat
+        if (not tryuntil(dig,5)) then
+          log ("cancel on "..dir)
+          dec() return
+        end
+      until move()
+    
+      lookaround(foundsth and rozkopDefaultSize or rozkop-1)
+      
+      while not moveBack() do log("removing unexpected obstacle") digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
+    end
   end
+  
   
   dec()
 end
@@ -132,17 +142,19 @@ function horizontalDigBack()
   turtle.turnRight()
 end
 
-function lookaround()
+function lookaround(rozkop)
   if (not inctry()) then return end
   
-  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp)
+  if (rozkop>0) then log("lookaround with rozkop"..rozkop)
+  
+  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp, rozkop)
   
   for s=1,4 do
-    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack,horizontalDigBack)
+    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack,horizontalDigBack, rozkop)
     turtle.turnRight()
   end
   
-  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown,turtle.digDown)
+  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown,turtle.digDown, rozkop)
   
   dec()
 end
@@ -159,7 +171,7 @@ function moveforward(n)
     end
   end
   
-  lookaround()
+  lookaround(0)
   moveforward(n-1)
   while not myBack() do log("removing unexpected obstacle") horizontalDigBack() end
 end
