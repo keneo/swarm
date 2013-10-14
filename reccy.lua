@@ -98,13 +98,21 @@ function worth(c)
   return true
 end
 
+function tryuntil(action,retrys)
+  for i=1,retrys do
+    local r = action()
+    if (r) then return true end
+  end
+  return false
+end
+
 function look(dir,compare,detect,move,dig,moveBack,digBack)
   if (not inctry()) then return end
   
   if (detect() and worth(compare)) then
     log("found sth on "..dir)
     repeat
-      if (not dig()) then
+      if (not tryuntil(dig,5)) then
         log ("cancel dig look "..dir)
         dec() return
       end
@@ -145,7 +153,7 @@ function moveforward(n)
   
   log ("mining forward "..n)
   while (not myForward()) do
-    if (not turtle.dig()) then
+    if (not tryuntil(turtle.dig,5)) then
       log ("cancel dig forw "..n)
       dec() return
     end
