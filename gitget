@@ -146,8 +146,6 @@ end
 term.setCursorPos(1, (#tPrompt + 1))
 download(createAddress(tConfig), tConfig["filename"])
 
-write(textutils.serialize(tConfig))
-
 if (string.ends(tConfig["filename"],".lua")) then
   shell.run("rm " ..tConfig["filename"]:gsub(".lua",""))
   shell.run("mv " ..tConfig["filename"].. " " .. tConfig["filename"]:gsub(".lua",""))
