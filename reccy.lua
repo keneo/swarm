@@ -112,24 +112,24 @@ end
 function look(dir,compare,detect,move,dig,moveBack,digBack, rozkop)
   if (not inctry()) then return end
     
-  if (detect()) then
-    local foundsth = worth(compare)
-    
-    if (foundsth) then log("found sth on "..dir) end
-    
-    if (foundsth or rozkop>0) then
-      repeat
-        if (not tryuntil(dig,5)) then
-          log ("cancel on "..dir)
-          dec() return
-        end
-      until move()
-    
-      lookaround(foundsth and rozkopDefaultSize or rozkop-1)
-      
-      while not moveBack() do log("removing unexpected obstacle") digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
-    end
-  end
+  --if (detect()) then
+  --  local foundsth = worth(compare)
+  --  
+  --  if (foundsth) then log("found sth on "..dir) end
+  --  
+   -- if (foundsth or rozkop>0) then
+  --    repeat
+  --      if (not tryuntil(dig,5)) then
+  --        log ("cancel on "..dir)
+  --        dec() return
+  --      end
+  --    until move()
+--
+   --   lookaround(foundsth and rozkopDefaultSize or rozkop-1)
+   --   
+  --    while not moveBack() do log("removing unexpected obstacle") digBack() end --technically endless but you should not find indestructable obstacle on your way back, right ?
+  --  end
+ -- end
   
   dec()
 end
