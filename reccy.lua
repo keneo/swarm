@@ -4,7 +4,7 @@
 
 -- dont let buggy robot escape you 
 maxMoves=5000 --not that buggy now
-stackDepthMax=20  -- we disallow recursion deeper than stackDepthMax
+stackDepthMax=500  -- we disallow recursion deeper than stackDepthMax
 stackDepthCurrent=0 
 --TODO:stackoverflow usually indicates bug that leads to escape, so when detected we shoul just directly return home for safety
 
