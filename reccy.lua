@@ -143,20 +143,20 @@ function horizontalDigBack()
 end
 
 function lookaround(rozkop)
-  if (not inctry()) then return end
-  
-  if (rozkop>0) then log("lookaround with rozkop"..rozkop)
-  
-  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp, rozkop)
-  
-  for s=1,4 do
-    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack,horizontalDigBack, rozkop)
-    turtle.turnRight()
-  end
-  
-  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown,turtle.digDown, rozkop)
-  
-  dec()
+--  if (not inctry()) then return end
+--  
+--  if (rozkop>0) then log("lookaround with rozkop"..rozkop)
+--  
+--  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp, rozkop)
+--  
+--  for s=1,4 do
+--    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack,horizontalDigBack, rozkop)
+--    turtle.turnRight()
+--  end
+--  
+--  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown,turtle.digDown, rozkop)
+--  
+--  dec()
 end
 
 function moveforward(n)
