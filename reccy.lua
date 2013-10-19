@@ -75,7 +75,7 @@ function locate()
   if (turtle.forward()) then
     local x2,y2,z2=gps.locate(5)
     turtle.back()
-    if (x2=nil) then log("failed. went out of gps range?") return end
+    if (x2==nil) then log("failed. went out of gps range?") return end
     if (z2<pos.z) then dir=0 log("north") return end
     if (z2>pos.z) then dir=2 log("south") return end
     if (x2>pos.x) then dir=1 log("east") return end
