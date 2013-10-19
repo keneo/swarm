@@ -1,5 +1,7 @@
 -- this startup should download fresh startup.second.lua and call it
+--exports:
 
+--require
 
 -- Loads a table from file
 function loadTable()
@@ -55,16 +57,43 @@ function download(sUrl, sPath)
   end
 end
 
+function ensureNewest(localFileName)
+  
+  if (fs.exists("/.git")) then  
+    -- we're running in the working copy - probably we're the source of everything. if not - do: git pull
+  else
+  
+    local tc = loadTable()
+    local githubFileName = localFileName
+    
+    tc["filename"]=githubFileName
+    download(createAddress(tc),localFileName)
+  end
+end
+
+
+local alreadyRequired = {}
+
+function require(filename)
+  if (not alreadyRequired[filename]) then
+    write("require('".. filename .."'): loading...\n")
+    alreadyRequired[filename]=true
+    ensureNewest(filename)
+    if (fs.exists(filename)) then
+      shell.run(filename)
+      write("require('".. filename .."'): done\n")
+    else
+      write("require('".. filename .."'): failed. file not found\n")
+    end
+  end  
+end
+
+
 function main()
   
-  local tc = loadTable()
+  require("startup.second.lua")
   
-  local localFileName = "startup.second.lua"
-  local githubFileName = localFileName
-  
-  tc["filename"]=githubFileName
-  download(createAddress(tc),localFileName)
-  shell.run(localFileName)
 end
+
 
 main()

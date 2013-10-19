@@ -1,2 +1,2 @@
-shell.run("tapi.lua")
+require("tapi.lua")
 t(({...})[1])

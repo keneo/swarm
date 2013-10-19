@@ -1,0 +1,2 @@
+require("reccy.lua")
+reccy( tonumber( ({...})[1]) or 10)

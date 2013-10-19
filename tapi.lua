@@ -1,5 +1,5 @@
 function t(code)
-  local t=turtle
+  local t=trackedTurtle or turtle
   d={
     ["f"]=t.forward,
     ["u"]=t.up,
