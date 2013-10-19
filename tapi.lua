@@ -14,7 +14,7 @@ function t(code)
     ["_"]=function()end
   }
   
-  code:gsub(".",
+  (code or ""):gsub(".",
                       function(c)
                         if c:find("%d")
                           then 
