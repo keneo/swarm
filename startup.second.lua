@@ -14,7 +14,7 @@ function secondmain()
   
   local label=os.getComputerLabel()
   
-  if (label=nil) then
+  if (label==nil) then
     label = "unnamed"
   end
   
