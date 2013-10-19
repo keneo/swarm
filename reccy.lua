@@ -52,7 +52,7 @@ end
 
 function log(s)
   local file = fs.open("log", "a")
-  local ls = pos .. (" "):rep(stackDepthCurrent)..textutils.serialize(s).."\n"
+  local ls = (pos or "no pos") .. (" "):rep(stackDepthCurrent)..textutils.serialize(s).."\n"
   write(ls)
   file.write(ls)
   file.close()
