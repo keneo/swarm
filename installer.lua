@@ -1,0 +1,50 @@
+wget https://github.com/keneo/swarm/archive/master.zip
+
+
+local function printUsage()
+	print( "Usages:" )
+	print( "wget <url>" )
+end
+
+local tArgs = { ... }
+if #tArgs < 1 then
+	printUsage()
+  	return
+end
+
+if not http then
+	print( "Pastebin requires http API" )
+	print( "Set enableAPI_http to true in ComputerCraft.cfg" )
+	return
+end
+
+local url = tArgs[1]
+
+local sFile = "file"
+local sPath = shell.resolve( sFile )
+if fs.exists( sPath ) then
+	print( "File already exists" )
+	return
+end
+
+-- GET the contents from pastebin
+write( "Downloading... " )
+local response = http.get(url)
+	
+if response then
+	print( "Success." )
+	
+	local sResponse = response.readAll()
+	response.close()
+	
+	local file = fs.open( sPath, "w" )
+	file.write( sResponse )
+	file.close()
+	
+	print( "Downloaded as "..sFile )
+	
+else
+	print( "Failed." )
+end	
+
+

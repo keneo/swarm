@@ -259,6 +259,7 @@ function start(n)
   log('requested moveforward '..n)
   if (validateStart()) then
     moveforward(n)
+    log("finished")
   else
     log('validation failed')
   end

@@ -1,3 +1,6 @@
+-- this startup should download fresh startup.second.lua and call it
+
+
 -- Loads a table from file
 function loadTable()
   sPath="gitget.cfg"
@@ -56,9 +59,8 @@ function main()
   
   local tc = loadTable()
   
-  local label=os.getComputerLabel()
-  local localFileName = "comp." .. label .. ".start.lua"
-  local githubFileName="autostarts/"..localFileName
+  local localFileName = "startup.second.lua"
+  local githubFileName = localFileName
   
   tc["filename"]=githubFileName
   download(createAddress(tc),localFileName)
