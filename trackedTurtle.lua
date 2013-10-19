@@ -63,6 +63,10 @@ function getDirVector()
   return vectorsByDirPlus1[dir+1]
 end
 
+function getPos()
+  return pos
+end
+
 function myForward()
   ensure_locate()
   maxMoves=maxMoves-1
