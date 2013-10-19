@@ -50,6 +50,10 @@ function saveString(sData, sPath)
   return true
 end
 
+
+local pos,dir
+
+
 function log(s)
   local file = fs.open("log", "a")
   local ls = (pos or "no pos") .. (" "):rep(stackDepthCurrent)..textutils.serialize(s).."\n"
@@ -57,9 +61,6 @@ function log(s)
   file.write(ls)
   file.close()
 end
-
-
-local pos,dir
 
 function ensure_locate()
   while (dir==nil) do 
