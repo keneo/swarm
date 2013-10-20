@@ -17,11 +17,11 @@ function dec() stackDepthCurrent=stackDepthCurrent-1 end
 function inctry() stackDepthCurrent=stackDepthCurrent+1; if (stackDepthCurrent==stackDepthMax) then dec() return false else return true end end
 
 
-
+local mytu = trackedTurtle or turtle
 
 function worth(c)
   for p=2,6 do --slots containing unintresting ores
-    turtle.select(p)
+    mytu.select(p)
     if (c()) then
       return false
     end
@@ -37,13 +37,25 @@ function tryuntil(action,retrys)
   return false
 end
 
+function ensure_have_place()
+  if (mytu.getItemCount(16)==0) then return true end --ok
+  
+  --else need 
+  
+  
+  
+end
+
 function look(dir,compare,detect,move,dig,moveBack,digBack, rozkop)
   if (not inctry()) then return end
     
   if (detect()) then
     local foundsth = worth(compare)
     
-    if (foundsth) then log("found sth on "..dir) end
+    if (foundsth) then 
+      log("found sth on "..dir) 
+      ensure_have_place()
+    end
     
     if (foundsth or rozkop>0) then
       repeat
@@ -65,7 +77,7 @@ end
 function horizontalDigBack()
   myTurnRight() 
   myTurnRight()
-  turtle.dig()
+  mytu.dig()
   myTurnRight() 
   myTurnRight()
 end
@@ -75,14 +87,14 @@ function lookaround(rozkop)
   
   if (rozkop>0) then log("lookaround with rozkop"..rozkop) end
   
-  look("down",turtle.compareDown,turtle.detectDown,myDown,turtle.digDown,myUp,turtle.digUp, rozkop)
+  look("down",mytu.compareDown,mytu.detectDown,myDown,mytu.digDown,myUp,mytu.digUp, rozkop)
   
   for s=1,4 do
-    look("forw"..s,turtle.compare,turtle.detect,myForward,turtle.dig,myBack,horizontalDigBack, rozkop)
+    look("forw"..s,mytu.compare,mytu.detect,myForward,mytu.dig,myBack,horizontalDigBack, rozkop)
     myTurnRight()
   end
   
-  look("up",turtle.compareUp,turtle.detectUp,myUp,turtle.digUp,myDown,turtle.digDown, rozkop)
+  look("up",mytu.compareUp,mytu.detectUp,myUp,mytu.digUp,myDown,mytu.digDown, rozkop)
   
   dec()
 end
@@ -93,7 +105,7 @@ function moveforward(n)
   
   log ("mining forward "..n)
   while (not myForward()) do
-    if (not tryuntil(turtle.dig,5)) then
+    if (not tryuntil(mytu.dig,5)) then
       log ("cancel dig forw "..n)
       dec() return
     end
@@ -106,11 +118,11 @@ function moveforward(n)
 end
 
 function validateStart()
-  if (turtle.getItemCount(2)==0) then return false end
-  if (turtle.getItemCount(3)==0) then return false end
-  if (turtle.getItemCount(4)==0) then return false end
-  if (turtle.getItemCount(5)==0) then return false end
-  if (turtle.getItemCount(6)==0) then return false end
+  if (mytu.getItemCount(2)==0) then return false end
+  if (mytu.getItemCount(3)==0) then return false end
+  if (mytu.getItemCount(4)==0) then return false end
+  if (mytu.getItemCount(5)==0) then return false end
+  if (mytu.getItemCount(6)==0) then return false end
   return true
 end
 

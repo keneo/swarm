@@ -133,7 +133,15 @@ trackedTurtle={
   dig=turtle.dig,
   digUp=turtle.digUp,
   digDown=turtle.digDown,
-  select=turtle.select
+  select=turtle.select,
+  compare=turtle.compare,
+  compareDown=turtle.compareDown,
+  compareUp=turtle.compareUp,
+  detect=turtle.detect,
+  detectDown=turtle.detectDown,
+  detectUp=turtle.detectUp,
+  getItemCount=turtle.getItemCount
+  
 }
 
 
