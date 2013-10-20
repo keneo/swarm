@@ -2,6 +2,7 @@
 --exports:
 
 --require
+--require_try
 
 -- Loads a table from file
 function loadTable()
@@ -76,16 +77,21 @@ local alreadyRequired = {}
 
 function require(filename)
   if (not alreadyRequired[filename]) then
-    write("require('".. filename .."'): loading...\n")
+    write(filename .. "...")
     alreadyRequired[filename]=true
     ensureNewest(filename)
     if (fs.exists(filename)) then
+      write("go\n")
       shell.run(filename)
-      write("require('".. filename .."'): done\n")
     else
-      write("require('".. filename .."'): failed. file not found\n")
+      write("miss\n")
+      error("require('".. filename .."'): failed. file not found")
     end
   end  
+end
+
+function require_try(filename)
+  return pcall(function() require(filename) end)
 end
 
 

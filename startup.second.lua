@@ -17,10 +17,10 @@ function secondmain()
   end
   
   if (turtle~=nil) then
-    require("all.turtles.start.lua")
+    require_try("all.turtles.start.lua")
   end  
  
-  require("autostarts/comp." .. (os.getComputerLabel() or "unnamed") .. ".start.lua")
+  require_try("autostarts/comp." .. (os.getComputerLabel() or "unnamed") .. ".start.lua")
   
 end
 
