@@ -40,9 +40,40 @@ end
 function ensure_have_place()
   if (mytu.getItemCount(16)==0) then return true end --ok
   
-  --else need 
+  --else need compress 
   
+  local emptyslot=nil
   
+  --drop unintresting
+  for i=7,16 do
+    mytu.select(i)
+    local intresting=true
+    
+    if (mytu.getItemCount(i)==0) then
+      emptyslot=i
+    end
+    
+    for u=2,6 do
+      if (mytu.compareTo(u)) then
+        intresting=false
+      end
+    end
+    
+    if (not intresting) then
+      mytu.drop()
+      emptyslot=i
+    end
+  end
+  
+  if (emptyslot) then
+    mytu.select(16)
+    mytu.transferTo(emptyslot)
+    mytu.select(7)
+    return true
+  else
+    log("could not empty")
+    return false
+  end
   
 end
 

@@ -137,11 +137,13 @@ trackedTurtle={
   compare=turtle.compare,
   compareDown=turtle.compareDown,
   compareUp=turtle.compareUp,
+  compareTo=turtle.compareTo,
+  transferTo=turtle.transferTo,
   detect=turtle.detect,
   detectDown=turtle.detectDown,
   detectUp=turtle.detectUp,
-  getItemCount=turtle.getItemCount
-  
+  getItemCount=turtle.getItemCount,
+  drop=turtle.drop  
 }
 
 
