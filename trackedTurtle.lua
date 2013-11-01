@@ -31,8 +31,8 @@ function locate_gps_or_manual()
     print("enter coords in form: x y z")
     local str = read()
     require("split.lua")
-    local x,y,z=str:split(" ")
-    return x,y,z
+    local t=split(str," ")    
+    return t[1],t[2],t[3]
   end
 end
 
@@ -49,7 +49,7 @@ function locate()
   if (pos.x==nil) then log("failed. TODO manual entry of position and/or ask to continue without this") return end
   log("finding face direction...")
   if (turtle.forward()) then
-    local x2,y2,z2=gps.locate(5)
+    local x2,y2,z2=locate_gps_or_manual()
     turtle.back()
     if (x2==nil) then log("failed. went out of gps range?") return end
     if (z2<pos.z) then dir=0 log("north") return end
