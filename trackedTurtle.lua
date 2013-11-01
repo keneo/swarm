@@ -24,11 +24,23 @@ function ensure_locate()
   end
 end
 
-function locate()
-  log("finding position...")
+function locate_gps_or_manual()
   local x,y,z=gps.locate(5)
   if (x==nil) then
-    log("gps.locate failed")
+    log("gps.locate failed. nedd manual entry")
+    print("enter coords in form: x y z")
+    local str = read()
+    require("split.lua")
+    local x,y,z=str:split(" ")
+    return x,y,z
+  end
+end
+
+function locate()
+  log("finding position...")
+  local x,y,z=locate_gps_or_manual(5)
+  if (x==nil) then
+    log("locate_gps_or_manual failed")
     return
   end
   
