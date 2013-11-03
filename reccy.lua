@@ -23,9 +23,11 @@ function worth(c)
   for p=2,6 do --slots containing unintresting ores
     mytu.select(p)
     if (c()) then
+      mytu.select(2)
       return false
     end
   end
+  mytu.select(2)
   return true
 end
 
@@ -68,9 +70,10 @@ function ensure_have_place()
   if (emptyslot) then
     mytu.select(16)
     mytu.transferTo(emptyslot)
-    mytu.select(7)
+    mytu.select(2)
     return true
   else
+    mytu.select(2)
     log("could not empty")
     return false
   end
