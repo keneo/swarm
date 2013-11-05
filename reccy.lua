@@ -39,10 +39,28 @@ function tryuntil(action,retrys)
   return false
 end
 
+local space_problem = false
+
 function ensure_have_place()
-  if (mytu.getItemCount(16)==0) then return true end --ok
+  if (mytu.getItemCount(16)==0) then 
+    space_problem=false
+    return true 
+  else
+    if (space_problem) then
+      return false
+    end -- else go compress
+  end --ok
   
   --else need compress 
+  
+  --on pattern slots drop every duplicaets
+  for i=2,6 do
+    local c = mytu.getItemCount(i)
+    if (c>1) then
+      mytu.select(i)
+      mytu.drop(c-1)
+    end
+  end
   
   local emptyslot=nil
   
@@ -71,10 +89,12 @@ function ensure_have_place()
     mytu.select(16)
     mytu.transferTo(emptyslot)
     mytu.select(2)
+    space_problem = false
     return true
   else
     mytu.select(2)
     log("could not empty")
+    space_problem = true
     return false
   end
   
