@@ -10,10 +10,7 @@ install [github username]
 ```
 
 
-get gitget:
-```
-pastebin get p94DtW8a gitget
-```
+
 
 
 legacy:
