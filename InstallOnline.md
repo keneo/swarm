@@ -1,7 +1,12 @@
 install:
 ```
-pastebin get q0ppdFKD install
+pastebin get A2ZLFGsc install
 install
+```
+or
+```
+pastebin get A2ZLFGsc install
+install [github username]
 ```
 
 
