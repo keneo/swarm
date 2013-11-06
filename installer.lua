@@ -1,33 +1,17 @@
-wget https://github.com/keneo/swarm/archive/master.zip
-
-
-local function printUsage()
-	print( "Usages:" )
-	print( "wget <url>" )
-end
-
-local tArgs = { ... }
-if #tArgs < 1 then
-	printUsage()
-  	return
-end
+--wget https://raw.github.com/keneo/swarm/master/startup.lua
 
 if not http then
-	print( "Pastebin requires http API" )
+	print( "Installer requires http API" )
 	print( "Set enableAPI_http to true in ComputerCraft.cfg" )
+  print( "Installation FAILED" )
 	return
 end
 
-local url = tArgs[1]
+local url = "https://raw.github.com/keneo/swarm/master/startup.lua"
 
-local sFile = "file"
+local sFile = "startup"
 local sPath = shell.resolve( sFile )
-if fs.exists( sPath ) then
-	print( "File already exists" )
-	return
-end
 
--- GET the contents from pastebin
 write( "Downloading... " )
 local response = http.get(url)
 	
@@ -42,6 +26,9 @@ if response then
 	file.close()
 	
 	print( "Downloaded as "..sFile )
+  print( "Starting..." )
+  
+  shell.run("startup")
 	
 else
 	print( "Failed." )

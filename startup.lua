@@ -8,7 +8,8 @@
 function loadTable()
   sPath="gitget.cfg"
   if not fs.exists(sPath) then
-    error("loadTable() file not found: " .. sPath)
+    --error("loadTable() file not found: " .. sPath)
+    saveString(textutils.serialize({user="keneo",project="swarm",branch="master",filename=""}),sPath)
   end
  
   if fs.isDir(sPath) then
