@@ -1,4 +1,5 @@
---wget https://raw.github.com/keneo/swarm/master/startup.lua
+--find the newest source at https://raw.github.com/keneo/swarm/master/startup.lua
+--find the newest pastebin at https://github.com/keneo/swarm/blob/master/InstallOnline.md
 
 if not http then
 	print( "Installer requires http API" )
@@ -7,16 +8,21 @@ if not http then
 	return
 end
 
-local url = "https://raw.github.com/keneo/swarm/master/startup.lua"
+githubUser = ({...})[1] or "keneo"
+
+print( "Installing swarm from github user '"..githubUser.."'... " )
+
+local url = "https://raw.github.com/"..githubUser.."/swarm/master/startup.lua"
 
 local sFile = "startup"
 local sPath = shell.resolve( sFile )
 
-write( "Downloading... " )
+write( "Connecting to github... " )
 local response = http.get(url)
 	
 if response then
 	print( "Success." )
+  write( "Downloading..." )
 	
 	local sResponse = response.readAll()
 	response.close()

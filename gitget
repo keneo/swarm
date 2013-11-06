@@ -104,7 +104,7 @@ end
 -- Checks for first run and creates config file
 function checkFirstInit()
   if not fs.exists(sConfigName) then
-    tInit = {["filename"] = "", ["branch"] = "master", ["project"] = "swarm", ["user"] = "keneo",}
+    tInit = {["filename"] = "", ["branch"] = "master", ["project"] = "swarm", ["user"] = githubUser or "keneo",}
     saveTable(tInit, sConfigName)
   end
 end
