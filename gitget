@@ -122,31 +122,38 @@ local tInputRow = {"prompt", "filename", "branch", "project", "user"}
  
 -- Runtime section
 checkFirstInit()
-term.clear()
-while true do
-  tConfig = loadTable(sConfigName)
-  tPrompt = assemblePromptTable(tConfig)
-  drawPrompt(tPrompt)
-  sInput = userInput(nInputPos, tPrompt)
- 
-  if sInput == "" then
-    sInput = tConfig[tInputRow[nInputPos]]
-    break
-  elseif sInput == " " then
+
+local filename = ({...})[1]
+if not filename then
+  term.clear()
+  while true do
+    tConfig = loadTable(sConfigName)
+    tPrompt = assemblePromptTable(tConfig)
+    drawPrompt(tPrompt)
+    sInput = userInput(nInputPos, tPrompt)
+   
+    if sInput == "" then
+      sInput = tConfig[tInputRow[nInputPos]]
+      break
+    elseif sInput == " " then
+        nInputPos = nInputPos + 1
+        if nInputPos > #tInputRow then nInputPos = 2 end
+    else
+      tConfig[tInputRow[nInputPos]] = sInput
+      saveTable(tConfig, sConfigName)
       nInputPos = nInputPos + 1
       if nInputPos > #tInputRow then nInputPos = 2 end
-  else
-    tConfig[tInputRow[nInputPos]] = sInput
-    saveTable(tConfig, sConfigName)
-    nInputPos = nInputPos + 1
-    if nInputPos > #tInputRow then nInputPos = 2 end
+    end
   end
+  filename = tConfig["filename"]
 end
+
+tConfig["filename"]=filename
  
 term.setCursorPos(1, (#tPrompt + 1))
-download(createAddress(tConfig), tConfig["filename"])
+download(createAddress(tConfig), filename)
 
-if (string.ends(tConfig["filename"],".lua")) then
-  shell.run("rm " ..tConfig["filename"]:gsub(".lua",""))
-  shell.run("mv " ..tConfig["filename"].. " " .. tConfig["filename"]:gsub(".lua",""))
+if (string.ends(filename,".lua")) then
+  shell.run("rm " ..filename:gsub(".lua",""))
+  shell.run("mv " ..filename.. " " .. filename:gsub(".lua",""))
 end

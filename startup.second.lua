@@ -12,6 +12,8 @@
 
 function secondmain()
 
+  ensureNewest("gitget")
+
   if (not fs.exists("autostarts")) then
     fs.makeDir("autostarts")
   end
