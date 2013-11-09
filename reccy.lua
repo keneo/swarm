@@ -172,11 +172,9 @@ function moveforward(n)
 end
 
 function validateStart()
-  if (mytu.getItemCount(2)==0) then return false end
-  if (mytu.getItemCount(3)==0) then return false end
-  if (mytu.getItemCount(4)==0) then return false end
-  if (mytu.getItemCount(5)==0) then return false end
-  if (mytu.getItemCount(6)==0) then return false end
+  for i=2,6 do
+    if (mytu.getItemCount(i)==0) then return false end
+  end
   return true
 end
 

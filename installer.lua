@@ -1,5 +1,5 @@
---find the newest source at https://raw.github.com/keneo/swarm/master/startup.lua
---find the newest pastebin at https://github.com/keneo/swarm/blob/master/InstallOnline.md
+--find the newest version source at https://raw.github.com/keneo/swarm/master/installer.lua
+--find the newest version pastebin and instructions at https://github.com/keneo/swarm/blob/master/InstallOnline.md
 
 if not http then
 	print( "Installer requires http API" )
