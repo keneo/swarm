@@ -33,6 +33,8 @@ function locate_gps_or_manual()
     require("split.lua")
     local t=split(str," ")    
     return t[1],t[2],t[3]
+  else
+    return x,y,z
   end
 end
 
@@ -40,7 +42,7 @@ function locate()
   log("finding position...")
   local x,y,z=locate_gps_or_manual(5)
   if (x==nil) then
-    log("locate_gps_or_manual failed")
+    log("lua failed")
     return
   end
   
