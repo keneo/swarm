@@ -32,10 +32,9 @@ function locate_gps_or_manual()
     local str = read()
     require("split.lua")
     local t=split(str," ")    
-    return t[1],t[2],t[3]
-  else
-    return x,y,z
+    x,y,z = t[1],t[2],t[3]
   end
+  return x,y,z
 end
 
 function locate()
@@ -157,7 +156,10 @@ trackedTurtle={
   detectDown=turtle.detectDown,
   detectUp=turtle.detectUp,
   getItemCount=turtle.getItemCount,
-  drop=turtle.drop  
+  drop=turtle.drop,
+  place=turtle.place,
+  placeUp=turtle.placeUp,
+  placeDown=turtle.placeDown,
 }
 
 
