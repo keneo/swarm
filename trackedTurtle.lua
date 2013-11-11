@@ -1,3 +1,32 @@
+local function package()
+  return {
+    forward=myForward,
+    back=myBack,
+    turnLeft=myTurnLeft,
+    turnRight=myTurnRight,
+    up=myUp,
+    down=myDown,
+    dig=turtle.dig,
+    digUp=turtle.digUp,
+    digDown=turtle.digDown,
+    select=turtle.select,
+    compare=turtle.compare,
+    compareDown=turtle.compareDown,
+    compareUp=turtle.compareUp,
+    compareTo=turtle.compareTo,
+    transferTo=turtle.transferTo,
+    detect    =function() return mydetect(turtle.detect,getDirVector()) end,
+    detectDown=function() return mydetect(turtle.detectDown,vectorDown) end,
+    detectUp  =function() return mydetect(turtle.detectUp,vectorDown) end,
+    getItemCount=turtle.getItemCount,
+    drop=turtle.drop,
+    place=turtle.place,
+    placeUp=turtle.placeUp,
+    placeDown=turtle.placeDown,
+    getFuelLevel=turtle.getFuelLevel,
+  } 
+end
+
 
 -- dont let buggy robot escape you 
 maxMoves=5000 
@@ -158,36 +187,11 @@ local function mydetect(tfunc,vec)
   return ret
 end
 
-trackedTurtle={
-  forward=myForward,
-  back=myBack,
-  turnLeft=myTurnLeft,
-  turnRight=myTurnRight,
-  up=myUp,
-  down=myDown,
-  dig=turtle.dig,
-  digUp=turtle.digUp,
-  digDown=turtle.digDown,
-  select=turtle.select,
-  compare=turtle.compare,
-  compareDown=turtle.compareDown,
-  compareUp=turtle.compareUp,
-  compareTo=turtle.compareTo,
-  transferTo=turtle.transferTo,
-  detect    =function() return mydetect(turtle.detect,getDirVector()) end,
-  detectDown=function() return mydetect(turtle.detectDown,vectorDown) end,
-  detectUp  =function() return mydetect(turtle.detectUp,vectorDown) end,
-  getItemCount=turtle.getItemCount,
-  drop=turtle.drop,
-  place=turtle.place,
-  placeUp=turtle.placeUp,
-  placeDown=turtle.placeDown,
-  getFuelLevel=turtle.getFuelLevel,
-}
-
-
 function setMaxMoves(n)
   maxMoves=n
 end
 
---log("trackedTurtle api loaded.")
+
+export = package()
+trackedTurtle = export
+return export
