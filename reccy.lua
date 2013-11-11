@@ -1,7 +1,7 @@
 -- recursive mining bot
 
 
-require("trackedTurtle.lua")
+local trackedTurtle = require("trackedTurtle.lua")
 --shell.run("common.lua")
 
 -- dont let buggy robot escape you 
