@@ -3,7 +3,9 @@ local function package()
     --pos_hash = pos_hash,
     location = location,
     set_walkable = set_walkable,
-    is_walkable = is_walkable,    
+    is_walkable = is_walkable,
+    save = save,
+    load = load
   }
 end
 
@@ -34,6 +36,17 @@ end
 local function is_walkable(pos)
   local l=location(pos)
   return l.walkable
+end
+
+local function save()
+  saveString(textutils.serialize(geotable),"map.txt")
+end
+
+local function load()
+  local file = fs.open("map.txt", "r")
+  local sTable = file.readAll()
+  file.close()
+  geotable = textutils.unserialize(sTable)
 end
 
 
