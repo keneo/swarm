@@ -85,7 +85,11 @@ function myForward()
   maxMoves=maxMoves-1
   if (maxMoves>0) then
     local ret = turtle.forward()
-    if (ret) then pos=pos+getDirVector() end
+    local targetpos = pos+getDirVector() --todo addition in place
+    if (ret) then 
+      pos=targetpos
+    end
+    if (map) then map.set_walkable(targetpos,ret)
     return ret
   end
   return false
@@ -96,11 +100,17 @@ function myBack()
   maxMoves=maxMoves-1
   if (maxMoves>0) then
     local ret = turtle.back()
-    if (ret) then pos=pos-getDirVector() end
+    local targetpos = pos-getDirVector() --todo addition in place
+    if (ret) then pos=targetpos end
+    if (map) then map.set_walkable(targetpos,ret)
     return ret
   end
   return false
 end
+
+local vectorUp = vector.new(0,1,0)
+local vectorDown = vector.new(0,-1,0)
+
 
 function myUp()
   ensure_locate()
@@ -108,9 +118,12 @@ function myUp()
   if (maxMoves>0) then
     local ret = turtle.up()
     pos.y=pos.y+1
+    if (map) then map.set_walkable(pos,ret)
     return ret
+  else
+    if (map) then map.set_walkable(pos+vectorUp,ret)
+    return false
   end
-  return false
 end
 
 function myDown()
@@ -119,9 +132,12 @@ function myDown()
   if (maxMoves>0) then
     local ret = turtle.down()
     pos.y=pos.y-1
+    if (map) then map.set_walkable(pos,ret)
     return ret
+  else
+    if (map) then map.set_walkable(pos+vectorDown,ret)
+    return false
   end
-  return false
 end
 
 function myTurnLeft()
@@ -134,6 +150,12 @@ function myTurnRight()
   ensure_locate()
   turtle.turnRight()
   dir=(dir+1)%4
+end
+
+local function mydetect(tfunc,vec)
+  local ret = tfunc()
+  if (map) then map.set_walkable(pos+vec,not ret)  
+  return ret
 end
 
 trackedTurtle={
@@ -152,14 +174,15 @@ trackedTurtle={
   compareUp=turtle.compareUp,
   compareTo=turtle.compareTo,
   transferTo=turtle.transferTo,
-  detect=turtle.detect,
-  detectDown=turtle.detectDown,
-  detectUp=turtle.detectUp,
+  detect    =function() return mydetect(turtle.detect,getDirVector()) end,
+  detectDown=function() return mydetect(turtle.detectDown,vectorDown) end,
+  detectUp  =function() return mydetect(turtle.detectUp,vectorDown) end,
   getItemCount=turtle.getItemCount,
   drop=turtle.drop,
   place=turtle.place,
   placeUp=turtle.placeUp,
   placeDown=turtle.placeDown,
+  getFuelLevel=turtle.getFuelLevel,
 }
 
 
@@ -167,4 +190,4 @@ function setMaxMoves(n)
   maxMoves=n
 end
 
-log("trackedTurtle api loaded.")
+--log("trackedTurtle api loaded.")
