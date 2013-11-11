@@ -1,13 +1,4 @@
-local function package()
-  return {
-    --pos_hash = pos_hash,
-    location = location,
-    set_walkable = set_walkable,
-    is_walkable = is_walkable,
-    save = save,
-    load = load
-  }
-end
+
 
 local geotable = {}
 
@@ -47,6 +38,17 @@ local function load()
   local sTable = file.readAll()
   file.close()
   geotable = textutils.unserialize(sTable)
+end
+
+local function package()
+  return {
+    --pos_hash = pos_hash,
+    location = location,
+    set_walkable = set_walkable,
+    is_walkable = is_walkable,
+    save = save,
+    load = load
+  }
 end
 
 

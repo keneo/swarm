@@ -1,31 +1,3 @@
-local function package()
-  return {
-    forward=myForward,
-    back=myBack,
-    turnLeft=myTurnLeft,
-    turnRight=myTurnRight,
-    up=myUp,
-    down=myDown,
-    dig=turtle.dig,
-    digUp=turtle.digUp,
-    digDown=turtle.digDown,
-    select=turtle.select,
-    compare=turtle.compare,
-    compareDown=turtle.compareDown,
-    compareUp=turtle.compareUp,
-    compareTo=turtle.compareTo,
-    transferTo=turtle.transferTo,
-    detect    =function() return mydetect(turtle.detect,getDirVector()) end,
-    detectDown=function() return mydetect(turtle.detectDown,vectorDown) end,
-    detectUp  =function() return mydetect(turtle.detectUp,vectorDown) end,
-    getItemCount=turtle.getItemCount,
-    drop=turtle.drop,
-    place=turtle.place,
-    placeUp=turtle.placeUp,
-    placeDown=turtle.placeDown,
-    getFuelLevel=turtle.getFuelLevel,
-  } 
-end
 
 
 -- dont let buggy robot escape you 
@@ -118,7 +90,7 @@ function myForward()
     if (ret) then 
       pos=targetpos
     end
-    if (map) then map.set_walkable(targetpos,ret)
+    if (map) then map.set_walkable(targetpos,ret) end
     return ret
   end
   return false
@@ -131,7 +103,7 @@ function myBack()
     local ret = turtle.back()
     local targetpos = pos-getDirVector() --todo addition in place
     if (ret) then pos=targetpos end
-    if (map) then map.set_walkable(targetpos,ret)
+    if (map) then map.set_walkable(targetpos,ret) end
     return ret
   end
   return false
@@ -147,10 +119,10 @@ function myUp()
   if (maxMoves>0) then
     local ret = turtle.up()
     pos.y=pos.y+1
-    if (map) then map.set_walkable(pos,ret)
+    if (map) then map.set_walkable(pos,ret) end
     return ret
   else
-    if (map) then map.set_walkable(pos+vectorUp,ret)
+    if (map) then map.set_walkable(pos+vectorUp,ret) end
     return false
   end
 end
@@ -161,10 +133,10 @@ function myDown()
   if (maxMoves>0) then
     local ret = turtle.down()
     pos.y=pos.y-1
-    if (map) then map.set_walkable(pos,ret)
+    if (map) then map.set_walkable(pos,ret) end
     return ret
   else
-    if (map) then map.set_walkable(pos+vectorDown,ret)
+    if (map) then map.set_walkable(pos+vectorDown,ret) end
     return false
   end
 end
@@ -183,12 +155,41 @@ end
 
 local function mydetect(tfunc,vec)
   local ret = tfunc()
-  if (map) then map.set_walkable(pos+vec,not ret)  
+  if (map) then map.set_walkable(pos+vec,not ret) end
   return ret
 end
 
 function setMaxMoves(n)
   maxMoves=n
+end
+
+local function package()
+  return {
+    forward=myForward,
+    back=myBack,
+    turnLeft=myTurnLeft,
+    turnRight=myTurnRight,
+    up=myUp,
+    down=myDown,
+    dig=turtle.dig,
+    digUp=turtle.digUp,
+    digDown=turtle.digDown,
+    select=turtle.select,
+    compare=turtle.compare,
+    compareDown=turtle.compareDown,
+    compareUp=turtle.compareUp,
+    compareTo=turtle.compareTo,
+    transferTo=turtle.transferTo,
+    detect    =function() return mydetect(turtle.detect,getDirVector()) end,
+    detectDown=function() return mydetect(turtle.detectDown,vectorDown) end,
+    detectUp  =function() return mydetect(turtle.detectUp,vectorDown) end,
+    getItemCount=turtle.getItemCount,
+    drop=turtle.drop,
+    place=turtle.place,
+    placeUp=turtle.placeUp,
+    placeDown=turtle.placeDown,
+    getFuelLevel=turtle.getFuelLevel,
+  } 
 end
 
 
