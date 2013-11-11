@@ -77,13 +77,18 @@ end
 local alreadyRequired = {}
 
 function require(filename)
-  if (not alreadyRequired[filename]) then
+  if (alreadyRequired[filename]) then
+    return alreadyRequired[filename]
+  else
     write(filename .. "...")
     alreadyRequired[filename]=true
     ensureNewest(filename)
     if (fs.exists(filename)) then
       write("go\n")
+      export = true
       shell.run(filename)
+      alreadyRequired[filename]=export
+      return export
     else
       write("miss\n")
       error("require('".. filename .."'): failed. file not found")
