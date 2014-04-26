@@ -12,9 +12,16 @@ stackDepthCurrent=0
 
 rozkopDefaultSize=1
 
+local cancelling = false
+
 
 function dec() stackDepthCurrent=stackDepthCurrent-1 end
-function inctry() stackDepthCurrent=stackDepthCurrent+1; if (stackDepthCurrent==stackDepthMax) then dec() return false else return true end end
+function inctry() 
+  if (cancelling or stackDepthCurrent==stackDepthMax) then 
+    cancelling=true 
+    return false 
+  else stackDepthCurrent=stackDepthCurrent+1; return true end 
+end
 
 
 local mytu = trackedTurtle or turtle
@@ -108,7 +115,10 @@ function look(dir,compare,detect,move,dig,moveBack,digBack, rozkop)
     
     if (foundsth) then 
       log("found sth on "..dir) 
-      ensure_have_place()
+      if (not ensure_have_place())
+        cancelling = true
+        return
+      end
     end
     
     if (foundsth or rozkop>0) then
@@ -180,6 +190,7 @@ end
 
 function reccy(n)
   log('requested moveforward '..n)
+  cancelling = false
   if (validateStart()) then
     moveforward(n)
     log("finished")
