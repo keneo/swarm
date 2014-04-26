@@ -115,7 +115,7 @@ function look(dir,compare,detect,move,dig,moveBack,digBack, rozkop)
     
     if (foundsth) then 
       log("found sth on "..dir) 
-      if (not ensure_have_place())
+      if (not ensure_have_place()) then
         cancelling = true
         return
       end
